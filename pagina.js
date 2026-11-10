@@ -146,7 +146,7 @@
   $$('[data-bonus-vago]').forEach(function (slot, i) {
     var b = bx[i]; if (!b) return;
     slot.innerHTML = (b.imagem ? '<img src="' + esc(b.imagem) + '" alt="" loading="lazy">' : '') + '<h3>' + esc(b.titulo) + '</h3><p>' + esc(b.descricao || '') + '</p>';
-    slot.removeAttribute('data-pendente'); slot.removeAttribute('data-bonus-vago');
+    slot.removeAttribute('data-pendente'); slot.removeAttribute('data-bonus-vago'); slot.classList.remove('vaga'); slot.classList.add('bonus-extra');
   });
 
   /* ---------- Contador regressivo: só com prazo verdadeiro em dados.js ---------- */
