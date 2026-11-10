@@ -35,7 +35,12 @@
   }
   // Clarity: carregado só se houver ID em dados.js. As UTMs viram filtros (tags) para comparar criativos.
   if (R.clarity && !REVISAO) {
-    (function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, doc, 'clarity', 'script', R.clarity);
+    // fila criada já (eventos e filtros entram nela); o script do Clarity só baixa depois da página pronta ou no primeiro toque/rolagem, para não pesar no carregamento
+    window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
+    var clarityFeito = false;
+    var carregaClarity = function () { if (clarityFeito) return; clarityFeito = true; var t = doc.createElement('script'); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + R.clarity; var y = doc.getElementsByTagName('script')[0]; y.parentNode.insertBefore(t, y); };
+    ['pointerdown', 'scroll', 'keydown'].forEach(function (ev) { addEventListener(ev, carregaClarity, { once: true, passive: true }); });
+    if (doc.readyState === 'complete') setTimeout(carregaClarity, 2500); else addEventListener('load', function () { setTimeout(carregaClarity, 2500); });
     ['utm_source', 'utm_campaign', 'utm_content', 'utm_medium', 'utm_term'].forEach(function (k) { if (ctx[k]) window.clarity('set', k, ctx[k]); });
     window.clarity('set', 'oferta', ctx.oferta);
     if (R.mascarar) root.setAttribute('data-clarity-mask', 'true');

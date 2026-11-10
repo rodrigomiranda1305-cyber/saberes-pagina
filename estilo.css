@@ -1,7 +1,7 @@
 /* Livro dos Saberes Esquecidos: visual de almanaque, nas cores da capa do livro (verde-mata e mostarda). */
 :root{
   --folha:#eef0e6; --folha-2:#e3e7d8; --branco:#fbfcf8; --mata:#1e3b2c; --mata-2:#264a37; --mata-linha:#3c5e4a;
-  --tinta:#23251c; --tinta-2:#4a4f40; --suave:#6a705e; --linha:#cdd3c0;
+  --tinta:#23251c; --tinta-2:#4a4f40; --suave:#53584a; --linha:#cdd3c0;
   --mostarda:#e3a92b; --mostarda-2:#c58d16; --mostarda-txt:#1c1505; --ferrugem:#a23d1f; --pele:#fbe9dc;
   --ok:#2f6f45; --foco:#c58d16;
   --f-tit:'Zilla Slab',Rockwell,'Courier New',serif;
