@@ -1,0 +1,45 @@
+/* Base comum (igual nas 4 páginas). O visual de cada oferta fica em estilo.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+img,video,svg{display:block;max-width:100%;height:auto}
+h1,h2,h3,h4,p,figure,blockquote,ul,ol{margin:0}
+ul[role=list],ol[role=list]{list-style:none;padding:0}
+a{color:inherit}
+a[href^="mailto:"]{overflow-wrap:anywhere}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--foco,#1d4ed8);outline-offset:3px}
+.so-leitor{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pular{position:absolute;left:12px;top:-60px;z-index:50;padding:10px 14px;background:#fff;color:#000;border-radius:6px}
+.pular:focus{top:12px}
+
+/* Conteúdo ainda não fornecido: escondido do comprador, visível no modo revisão (?revisao=1) */
+html:not(.revisao) [data-pendente]{display:none!important}
+.revisao [data-pendente]{position:relative;outline:2px dashed #e11d48;outline-offset:6px}
+.revisao [data-pendente]::before{content:"ESPAÇO RESERVADO \2022  " attr(data-pendente);display:block;font:700 13px/1.35 system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#fff;background:#e11d48;padding:7px 10px;margin:0 0 12px;border-radius:4px;text-align:left}
+.aviso-revisao{position:sticky;top:0;z-index:60;background:#e11d48;color:#fff;font:600 14px/1.35 system-ui,sans-serif;padding:10px 16px;text-align:center}
+.aviso-revisao code{background:#0002;padding:1px 5px;border-radius:3px}
+
+/* Botão fixo de compra */
+.barra-compra{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);visibility:hidden;transition:transform .28s ease,visibility 0s linear .28s;pointer-events:none}
+.barra-compra.visivel{transform:none;visibility:visible;transition:transform .28s ease;pointer-events:auto}
+.captura-inteira .barra-compra{display:none}
+.no-js .barra-compra,html:not(.js) .barra-compra{display:none}
+
+/* Revelação discreta (só para quem não pediu menos movimento) */
+.js [data-revela]{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js [data-revela].visto{opacity:1;transform:none}
+
+/* Carrossel */
+[data-carrossel] .trilho{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
+[data-carrossel] .trilho::-webkit-scrollbar{display:none}
+[data-carrossel] .trilho>*{scroll-snap-align:start;flex:none}
+
+/* Perguntas frequentes */
+details>summary{list-style:none;cursor:pointer}
+details>summary::-webkit-details-marker{display:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .js [data-revela]{opacity:1;transform:none}
+}
